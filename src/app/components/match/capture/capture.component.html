@@ -1,0 +1,40 @@
+<app-layout>
+
+  <form [formGroup]="nameForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label for="name" class="col-md-2">Name:</label>
+      <div class="col-md-10">
+        <input type="text" id="name" name="name" formControlName="nameControl" class="form-control">
+        <div *ngIf="nameForm.get('nameControl')?.hasError('required') && nameForm.get('nameControl')?.touched" class="text-danger">
+          Name is required.
+        </div>
+        <div *ngIf="nameForm.get('nameControl')?.hasError('maxlength') && nameForm.get('nameControl')?.touched" class="text-danger">
+          Name cannot exceed 200 characters.
+        </div>
+    
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <label for="matchDate" class="col-md-2">Match Date:</label>
+      <div class="col-md-10">
+        <mat-form-field>
+          <input matInput [matDatepicker]="matchDatepicker" formControlName="matchDateControl" required>
+          <mat-datepicker-toggle matSuffix [for]="matchDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #matchDatepicker></mat-datepicker>
+        </mat-form-field>
+        <div *ngIf="nameForm.get('matchDateControl')?.hasError('required') && nameForm.get('matchDateControl')?.touched" class="text-danger">
+          Match Date is required.
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-10 offset-md-2">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+  
+
+</app-layout>
